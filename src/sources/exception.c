@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include "../headers/lib.h"
 
+#ifdef __PL_WINDOWS__
+
+// TODO: Михаил :)
+
+#endif // __PL_WINDOWS__
+
 #ifdef __PL_LINUX__
 
 void fpe_signal_handler(int sig) {
