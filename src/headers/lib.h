@@ -1,6 +1,18 @@
 #ifndef LIB_H
 #define LIB_H
 
+#ifdef __PL_WINDOWS__
+
+// Begin exception handling
+#define BEGIN_EXCEPTION_HANDLING \
+	; // TODO: Михаил :)
+
+// End exception handling
+#define END_EXCEPTION_HANDLING \
+	; // TODO: Михаил :)
+
+#endif // __PL_WINDOWS__
+
 #ifdef __PL_LINUX__
 
 #include <setjmp.h>
