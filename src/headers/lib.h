@@ -32,13 +32,13 @@ int jmp;
 		file = __FILE__; \
 		line = __LINE__; \
 		fpe_signal_react = signal(SIGFPE, fpe_signal_handler); \
-		segv_signal_react = signal(SIGFPE, segv_signal_handler); \
-		abrt_signal_react = signal(SIGFPE, abrt_signal_handler); \
+		segv_signal_react = signal(SIGSEGV, segv_signal_handler); \
+		abrt_signal_react = signal(SIGABRT, abrt_signal_handler); \
 	} \
 	if (jmp == 0)
 
 // End exception handling
-#define END_EXCEPTION_HANDLING else { }
+#define END_EXCEPTION_HANDLING else {}
 
 void fpe_signal_handler(int sig);
 void segv_signal_handler(int sig);
