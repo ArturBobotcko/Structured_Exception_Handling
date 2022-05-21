@@ -17,12 +17,6 @@ void fpe_signal_handler(int sig);
 void segv_signal_handler(int sig);
 void abrt_signal_handler(int sig);
 
-enum Errors {
-	ZeroDivisionError = 1,
-	SegmentationFault,
-	Aborted
-};
-
 char* file;  
 int line;  
 int jmp; 
