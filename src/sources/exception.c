@@ -3,28 +3,10 @@
 
 #ifdef __PL_WINDOWS__
 
-void segv_signal_handler(int sig) {
-	printf("%s:%d: exception: Segmentation fault (error code %d)\n", file, line, SIGSEGV);
-	if (signal(SIGSEGV, segv_signal_react) == SIG_ERR) {
-		perror("Error restoring a default signal");
-	}
-	longjmp(savebuf, SIGSEGV);
-}
-
-void fpe_signal_handler(int sig) {
-	printf("%s:%d: exception: Division by zero (error code %d)\n", file, line, SIGFPE);
-	if (signal(SIGFPE, fpe_signal_react) == SIG_ERR) {
-		perror("Error restoring a default signal");
-	}
-	longjmp(savebuf, SIGFPE);
-}
-
-void abrt_signal_handler(int sig) {
-	printf("%s:%d: exception: Aborted (error code %d)\n", file, line, SIGABRT);
-	if (signal(SIGABRT, abrt_signal_react) == SIG_ERR) {
-		perror("Error restoring a default signal");
-	}
-	longjmp(savebuf, SIGABRT);
+void print_error_message()
+{
+	printf("%s\n", exc.message);
+	printf("Exception was raised in %s file in line %d\n", exc.file_name, exc.line);
 }
 
 #endif // __PL_WINDOWS__
