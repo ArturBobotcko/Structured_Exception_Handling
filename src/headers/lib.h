@@ -15,7 +15,7 @@ void print_error_message(); // функция для вывода сообщения об ошибке
 
 typedef struct exception // структура, содержащая всю информацию об исключении
 {
-	jmp_buf savebuf; // 
+	jmp_buf savebuf; 
 	char* message; // сообщение, переданное функцией throw(err_message)
 	char* file_name; // название файла, выбросившего исключение
 	int line; // номер строки, где было выброшено исключение

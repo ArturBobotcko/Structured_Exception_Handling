@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 	BEGIN_EXCEPTION_HANDLING {
 		int* a = NULL;
 		if (a == NULL) {
-			throw("Null pointer");
+			throw("Null pointer error");
 		}
 		int b = *a;
 	}
