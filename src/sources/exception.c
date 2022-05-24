@@ -1,4 +1,5 @@
 #include "../headers/lib.h"
+#include <stdio.h>
 
 #ifdef __PL_WINDOWS__
 
