@@ -3,31 +3,31 @@
 
 #ifdef __PL_WINDOWS__
 
-#include <setjmp.h> // библиотека с функциями setjmp и longjmp
-#include <stdio.h> // библиотека с функцией printf
+#include <setjmp.h> // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ setjmp пїЅ longjmp
+#include <stdio.h> // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ printf
 
 enum {
-	FALSE, // = 0, исключение не вызвано
-	TRUE // = 1, исключение вызвано
+	FALSE, // = 0, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	TRUE // = 1, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 };
 
-void print_error_message(); // функция для вывода сообщения об ошибке
+void print_error_message(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-typedef struct exception // структура, содержащая всю информацию об исключении
+typedef struct exception // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 {
 	jmp_buf savebuf; 
-	char* message; // сообщение, переданное функцией throw(err_message)
-	char* file_name; // название файла, выбросившего исключение
-	int line; // номер строки, где было выброшено исключение
-	int exception_raised; // идентификатор исключения (FALSE или TRUE)
+	char* message; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ throw(err_message)
+	char* file_name; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	int line; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	int exception_raised; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (FALSE пїЅпїЅпїЅ TRUE)
 } exception;
 
 exception exc; 
 
 #define BEGIN_EXCEPTION_HANDLING \
-	if ((exc.exception_raised = setjmp(exc.savebuf)) == FALSE) // проверка на состояние исключения
+	if ((exc.exception_raised = setjmp(exc.savebuf)) == FALSE) // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-#define END_EXCEPTION_HANDLING else {print_error_message();} // вывод сообщения об ошибке в случае, если исключение вызвано
+#define END_EXCEPTION_HANDLING else {print_error_message();} // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 #define throw(err_message) exc.file_name = __FILE__; \
 					exc.line = __LINE__; \
@@ -42,7 +42,7 @@ exception exc;
 #include <setjmp.h>
 #include <signal.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 jmp_buf savebuf;
 
 void (*fpe_signal_react)(int);
